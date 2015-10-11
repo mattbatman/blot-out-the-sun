@@ -52,12 +52,11 @@ var cssCircle = document.getElementById('floating-circle-div'); //reference to C
 var htmlEarth = document.getElementById('earth');
 //END DOM REFERENCE VARIABLES
 
-
+/*
 function refreshPage() {
-  //confirmButtonClickCounter = 0;
-  //pageAdvancement();
   document.location.reload(true);
 }
+*/
 
 
 
@@ -146,10 +145,10 @@ function Circle(distanceTraveled, startTime, endPosition, duration, animationRun
     } else {
       htmlEarth.style.height = '13%';
     }
-    htmlButton.style.visibility = 'initial';
-    htmlButton.setAttribute('class', 'day-button');
-    htmlButton.textContent = textToDisplay.confirmButtonText[4];
-    htmlButton.addEventListener('click', refreshPage, false);
+//    htmlButton.style.visibility = 'initial';
+//    htmlButton.setAttribute('class', 'day-button');
+//    htmlButton.textContent = textToDisplay.confirmButtonText[4];
+//    htmlButton.addEventListener('click', refreshPage, false);
   };
 
   //renderAnimationLinear() begins moving the css circle across screen

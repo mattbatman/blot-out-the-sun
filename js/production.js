@@ -54,7 +54,7 @@ var htmlEarth = document.getElementById('earth');
 
 
 function refreshPage() {
-  window.location.reload(true);
+  window.location.reload();
 }
 
 

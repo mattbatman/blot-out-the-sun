@@ -54,6 +54,8 @@ var htmlEarth = document.getElementById('earth');
 
 
 function refreshPage() {
+  sun.reset();
+  moon.reset();
   window.location.reload(true);
 }
 

@@ -54,8 +54,6 @@ var htmlEarth = document.getElementById('earth');
 
 
 function refreshPage() {
-  sun.reset();
-  moon.reset();
   window.location.reload(true);
 }
 
@@ -383,6 +381,17 @@ function pageAdvancement() {
 
 
 //animate moon when page loads
+document.addEventListener('DOMContentLoaded',
+function() {
+  (function moonAnimation(){
+    moon.renderAnimationCircular();
+    if (moon.animationRunning) {
+      requestAnimationFrame(moonAnimation, cssCircle);
+    }
+  })();
+},
+false);
+/*
 window.addEventListener('load',
 function() {
   (function moonAnimation(){
@@ -393,7 +402,7 @@ function() {
   })();
 },
 false);
-
+*/
 //advance page when user confirmation button is clicked
 htmlButton.addEventListener('click', pageAdvancement, false);
 

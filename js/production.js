@@ -53,9 +53,11 @@ var htmlEarth = document.getElementById('earth');
 //END DOM REFERENCE VARIABLES
 
 
-//function refreshPage() {
-//  window.location.reload();
-//}
+function refreshPage() {
+  //confirmButtonClickCounter = 0;
+  //pageAdvancement();
+  document.location.reload(true);
+}
 
 
 
@@ -147,7 +149,7 @@ function Circle(distanceTraveled, startTime, endPosition, duration, animationRun
     htmlButton.style.visibility = 'initial';
     htmlButton.setAttribute('class', 'day-button');
     htmlButton.textContent = textToDisplay.confirmButtonText[4];
-    //htmlButton.addEventListener('click', refreshPage, false);
+    htmlButton.addEventListener('click', refreshPage, false);
   };
 
   //renderAnimationLinear() begins moving the css circle across screen

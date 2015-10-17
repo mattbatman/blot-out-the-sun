@@ -96,18 +96,18 @@ var score = 0; //tracks the user's score
 
 //CIRCULAR PATH VARIABLES
 var centerX = window.innerWidth/2;
-var centerY = window.innerHeight * 0.333;
+var centerY = window.innerHeight * 0.25;
 //var duration = 4; // seconds
 var radiusX = htmlGameBorder.clientWidth/2 - (cssCircle.offsetWidth/2); // pixels
-var radiusY = window.innerHeight/3; //pixels
+var radiusY = window.innerHeight/2; //pixels
 //var stretchFactor = 1.1;
 var progress, x, y;
 
 function adjustCenterOfPath() {
   centerX = window.innerWidth/2;
-  centerY = window.innerHeight * 0.333;
+  centerY = window.innerHeight * 0.25;
   radiusX = htmlGameBorder.clientWidth/2 - (cssCircle.offsetWidth/2); // pixels
-  radiusY = window.innerHeight/3; //pixels
+  radiusY = window.innerHeight/2; //pixels
 }
 
 //use onresize browers support with window.innerHeight > window.innerWidth

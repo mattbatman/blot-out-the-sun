@@ -52,12 +52,6 @@ var cssCircle = document.getElementById('floating-circle-div'); //reference to C
 var htmlEarth = document.getElementById('earth');
 //END DOM REFERENCE VARIABLES
 
-/*
-function refreshPage() {
-  document.location.reload(true);
-}
-*/
-
 
 
 //GAME OBJECTS
@@ -108,6 +102,15 @@ var radiusX = htmlGameBorder.clientWidth/2 - (cssCircle.offsetWidth/2); // pixel
 var radiusY = window.innerHeight/3; //pixels
 //var stretchFactor = 1.1;
 var progress, x, y;
+
+function adjustCenterOfPath() {
+  centerX = window.innerWidth/2;
+  centerY = window.innerHeight * 0.333;
+  radiusX = htmlGameBorder.clientWidth/2 - (cssCircle.offsetWidth/2); // pixels
+  radiusY = window.innerHeight/3; //pixels
+}
+
+//use onresize browers support with window.innerHeight > window.innerWidth
 //END CIRCULAR PATH VARIABLES
 
 
@@ -204,6 +207,8 @@ function Circle(distanceTraveled, startTime, endPosition, duration, animationRun
     }
 
   };
+
+  /*keep dummy object. switch "begging" whether in landscape or portrait */
 
 
 }//END CIRCLE OBJECT
@@ -406,6 +411,9 @@ false);
 */
 //advance page when user confirmation button is clicked
 htmlButton.addEventListener('click', pageAdvancement, false);
+
+//watch for resize of browser and change center of cirle's PATH
+window.onresize = adjustCenterOfPath;
 
 
 

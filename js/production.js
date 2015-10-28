@@ -43,13 +43,45 @@ appConfig.js contains variables and methods used by app.js (the driver program)
 
 
 //DOM REFERENCE VARIABLES
+// VARIABLES THAT REPRESENT THE DIV TO BE TOGGLED TO "DISPLY: ON" or "DISPLAY: OFF"
+var landingPage = document.getElementById('landing-page-screen');
+var secondPage = document.getElementById('second-title-screen');
+var thirdPage = document.getElementById('third-title-screen');
+var gamePage = document.getElementById('game-screen');
+var lostPage = document.getElementById('lost-screen');
+var winPage = document.getElementById('win-screen');
+// END TOGGLE DIVS
+
+// VARIABLES THAT ARE "PER SECTION OF DIV"
+// USER CONFIRM BUTTONS
+// buttons are frequently used to pause the page until the user clicks to continue
+var htmlButtonOne = document.getElementById('user-confirm-button-one');
+var htmlButtonTwo = document.getElementById('user-confirm-button-two');
+var htmlButtonThree = document.getElementById('user-confirm-button-three');
+var htmlButtonLost = document.getElementById('user-confirm-button-reset');
+var htmlButtonWin = document.getElementById('user-confirm-button-win');
+// END USER CONFIRM BUTTONS
+// MISC VARIABLES
+var speciesParagraph = document.getElementById('species-story-text');
+var htmlGameHeader = document.getElementById('game-header-text'); //header text on page
 var htmlBody = document.getElementById('body-id'); //full page
 var htmlGameBorder = document.getElementById('main-game-box'); //div containg game
-var htmlHeader = document.getElementById('main-header-text'); //header text on page
-var htmlParagraph = document.getElementById('main-paragraph-text'); //paragraph text on page
-var htmlButton = document.getElementById('user-confirm-button'); //button frequently used to pause page until user clicks to continue
+var moonPathBorder = document.getElementById('intro-moon-box'); //div moon intro similar to game
+var htmlParagraphLost = document.getElementById('paragraph-lost-text'); //paragraph text on lost page
+var htmlParagraphWin = document.getElementById('paragraph-win-text'); //paragraph text on win page
 var cssCircle = document.getElementById('floating-circle-div'); //reference to CSS circle used as a moon or sun in the animation/gameplay
-var htmlEarth = document.getElementById('earth');
+var htmlEarth = document.getElementById('earth');//reference to bottom portion of screen to represnet the ground during gameplay
+// END MISC REFERENCE VARIABLES
+
+
+// INITIALIZE TOGGLED DISPLAY VARIABLES
+secondPage.style.display = 'none';
+thirdPage.style.display = 'none';
+gamePage.style.display = 'none';
+lostPage.style.display = 'none';
+winPage.style.display = 'none';
+htmlEarth.style.display = 'none';
+// END INITIALIZE TOGGLED DISPLAY VARIABLES
 //END DOM REFERENCE VARIABLES
 
 
@@ -63,25 +95,15 @@ var sun = new Circle('0%', null, 92, 99, false, true, 0);
 
 //TEXT CONTENT VARIABLES
 var textToDisplay = {
-  headerText: ['Blot Out the Sun', 'You Are A...', 'Behold!'],
-  paragraphText: ['Prepare for the sun to rise!',
-  'You have chosen to be a race notorious for romantically engaging high school companions despite having a mental age that is centuries old. Your undead life is comfortable (albeit dramatic). However, the sun is about to rise and burn you alive. Strike it down to continue preying on young humans.',
-'You are the beastly werewolf. You are a member of the choir of your werewolf church, and practice has gone too long. The sun is about to rise. Protect your pack. Strike down the sun.',
-"You are an archer in Xerxes the Great's Persian army. Some pesky Spartans are resisting your advances. Prepare your arrow and blot out the sun.",
-'Your score: ',
-"Such skill! You've restored the night times. But beware -- the sun always rises.",
-''],
-  confirmButtonText: ['ENTER', 'APPLY SUNSCREEN', 'START', 'CONTINUE', 'PLAY AGAIN'],
+  speciesText: [
+    'You have chosen to be a race notorious for romantically engaging high school companions despite having a mental age that is centuries old. Your undead life is comfortable (albeit dramatic). However, the sun is about to rise and burn you alive. Strike it down to continue preying on young humans.',
+    'You are the beastly werewolf. You are a member of the choir of your werewolf church, and practice has gone too long. The sun is about to rise. Protect your pack. Strike down the sun.',
+    "You are an archer in Xerxes the Great's Persian army. Some pesky Spartans are resisting your advances. Prepare your arrow and blot out the sun."
+  ],
   countdownText: ['3', '2', '1', 'Go!'],
   resultText: ['Darkness Shall Reign', 'Game Over']
 };
-var radioFormMarkup = '<fieldset id="radioRaceSelection">' +
-                      '<input type="radio" name="radio-choice" id="radio-choice-1" tabindex="1" value="Vampire"><label for="radio-choice-1">Vampire</label>' +
-                      '<br>' +
-                      '<input type="radio" name="radio-choice" id="radio-choice-2" tabindex="2" value="Werewolf"><label for="radio-choice-2">Werewolf</label>' +
-                      '<br>' +
-                      '<input type="radio" name="radio-choice" id="radio-choice-3" tabindex="3" value="Persian Archer"><label for="radio-choice-3">Persian Archer</label>' +
-                      '</fieldset>';
+
 //END TEXT CONTENT VARIABLES
 
 
@@ -92,13 +114,12 @@ var confirmButtonClickCounter = 0; //tracks the number of times the confirm butt
 var score = 0; //tracks the user's score
 //END TRACKER VARIABLES
 
-
-
+/* 10.22.15 -- NEED TO CREATE TWO SETS OF THESE VARIABLES DEPENDING ON WHETHER THE CIRCLE IS FOR THE SUN OR MOON */
 //CIRCULAR PATH VARIABLES
 var centerX = window.innerWidth/2;
 var centerY = window.innerHeight * 0.25;
 //var duration = 4; // seconds
-var radiusX = htmlGameBorder.clientWidth/2 - (cssCircle.offsetWidth/2); // pixels
+var radiusX = window.innerWidth/3; // pixels
 var radiusY = window.innerHeight/2; //pixels
 //var stretchFactor = 1.1;
 var progress, x, y;
@@ -106,7 +127,7 @@ var progress, x, y;
 function adjustCenterOfPath() {
   centerX = window.innerWidth/2;
   centerY = window.innerHeight * 0.25;
-  radiusX = htmlGameBorder.clientWidth/2 - (cssCircle.offsetWidth/2); // pixels
+  radiusX = window.innerWidth/3; // pixels
   radiusY = window.innerHeight/2; //pixels
 }
 
@@ -132,7 +153,7 @@ function Circle(distanceTraveled, startTime, endPosition, duration, animationRun
     this.distanceTraveled = '0%'; // initialize distanceTraveled to 0
     this.startTime = null;
     this.endPosition = 92; // in percent
-    this.duration = this.duration * 0.666;
+    this.duration = this.duration * 0.555;
     this.animationRunning = true;
     this.forGame = true;
     cssCircle.style.visibility = 'initial';
@@ -140,37 +161,34 @@ function Circle(distanceTraveled, startTime, endPosition, duration, animationRun
 
   };//end reset()
 
-  this.lost = function() {
-    htmlHeader.textContent = textToDisplay.resultText[1];
-    htmlParagraph.textContent = "You blotted the sun " + this.score + " times before failing your fellow creatures of the dark. You meditate on their screams as you all slowly burn to death.";
-    if (window.innerWidth < 400) {
-      htmlEarth.style.height = '0%';
-    } else {
-      htmlEarth.style.height = '13%';
-    }
-//    htmlButton.style.visibility = 'initial';
-//    htmlButton.setAttribute('class', 'day-button');
-//    htmlButton.textContent = textToDisplay.confirmButtonText[4];
-//    htmlButton.addEventListener('click', refreshPage, false);
+  this.hardReset = function() {
+    this.distanceTraveled = '0%'; // initialize distanceTraveled to 0
+    this.startTime = null;
+    this.endPosition = 92; // in percent
+    this.duration = 99;
+    this.animationRunning = false;
+    this.forGame = true;
+    this.score = 0;
+    cssCircle.style.visibility = 'initial';
+    cssCircle.style.left = distanceTraveled;
   };
 
-  //renderAnimationLinear() begins moving the css circle across screen
-  this.renderAnimationLinear = function(time) {
-    if (time === undefined) {
-      time = new Date().getTime();
-    }
-    if (this.startTime === null) {
-      this.startTime = time;
-    }
+  this.resetMoon = function() {
+    this.distanceTraveled = '0%'; // initialize distanceTraveled to 0
+    this.startTime = null;
+    this.endPosition = 92; // in percent
+    this.duration = 175;
+    this.animationRunning = true;
+    this.forGame = false;
+    cssCircle.style.visibility = 'initial';
+    cssCircle.style.left = distanceTraveled;
+  };
 
-    this.distanceTraveled = ((time - this.startTime) / this.duration * this.endPosition);
-
-    if (this.distanceTraveled > this.endPosition) {
-      cssCircle.style.visibility = 'hidden';
-      this.animationRunning = false;
-    }
-    cssCircle.style.left = this.distanceTraveled + '%';
-  };//end renderAnimationLinear()
+  this.lost = function() {
+    gamePage.style.display = 'none';
+    lostPage.style.display = 'block';
+    htmlParagraphLost.textContent = "You blotted the sun " + this.score + " times before failing your fellow creatures of the dark. You meditate on their screams as you all slowly burn to death.";
+  };
 
   /*
   circular animation taken from http://www.the-art-of-web.com/javascript/animate-curved-path/
@@ -208,9 +226,6 @@ function Circle(distanceTraveled, startTime, endPosition, duration, animationRun
 
   };
 
-  /*keep dummy object. switch "begging" whether in landscape or portrait */
-
-
 }//END CIRCLE OBJECT
 
 
@@ -229,20 +244,27 @@ function animateSun(){
   }
 }//use to call renderAnimation()
 
+function animateMoon(){
+  //watch sun circle for click when visible
+  moon.renderAnimationCircular();
+  if (moon.animationRunning) {
+    requestAnimationFrame(animateMoon, cssCircle);
+  }
+}//use to call renderAnimation()
+
 
 
 //function sunCircleClicked
 function sunCircleClicked() {
   sun.score++;
   sun.animationRunning = false;
-  htmlEarth.removeAttribute('class');
-  htmlHeader.textContent = textToDisplay.resultText[0];
-  htmlParagraph.textContent = "Such skill! You've restored the night " + sun.score + " times. But beware - the sun always rises. It's peaking now. It seems stronger somehow...";
+  gamePage.style.display = 'none';
+  winPage.style.display = 'block';
+  htmlEarth.style.display = 'none';
+  htmlParagraphWin.textContent = "Such skill! You've restored the night " + sun.score + " times - but beware, for the sun always rises. It's peaking now. It seems stronger somehow...";
   cssCircle.style.visibility = 'hidden';
-  htmlButton.style.visibility = 'initial';
   htmlBody.setAttribute('class', 'night-body-settings');
-  htmlButton.textContent = textToDisplay.confirmButtonText[3];
-  htmlButton.addEventListener('click', startCountdown, false);
+  //used to hold event listern for button on this line
 }
 //end function sunCircleClicked
 
@@ -254,35 +276,32 @@ var countdownCallTracker = 0; // tracks the number of times countdown() has been
 var countdownIntervalCycle;
 
 function startCountdown() {
+  thirdPage.style.display = 'none';
+  winPage.style.display = 'none';
+  gamePage.style.display = 'block';
   countdownCallTracker = 0;
-  //hide the confirm button
-  htmlButton.style.visibility = 'hidden';
-  //change the background color
-  htmlBody.setAttribute('class', 'day-body-settings');
-  //make paragraph text blank -- the last element of the paragraphText display needs to stay '' for this to work
-  htmlParagraph.textContent = textToDisplay.paragraphText[textToDisplay.paragraphText.length - 1];
-  //call countdown()
-  countdown();
+  htmlBody.setAttribute('class', 'day-body-settings'); //change the background color
+  countdown(); //call countdown()
   countdownIntervalCycle = setInterval(countdown, countdownInterval);
 }
 
 function countdown() {
   switch (countdownCallTracker) {
     case 0:
-      htmlEarth.setAttribute('class', 'ground');
-      htmlHeader.textContent = textToDisplay.countdownText[countdownCallTracker];
+      htmlEarth.style.display = 'block';
+      htmlGameHeader.textContent = textToDisplay.countdownText[countdownCallTracker];
       break;
     case 1:
-      htmlHeader.textContent = textToDisplay.countdownText[countdownCallTracker];
+      htmlGameHeader.textContent = textToDisplay.countdownText[countdownCallTracker];
       break;
     case 2:
-      htmlHeader.textContent = textToDisplay.countdownText[countdownCallTracker];
+      htmlGameHeader.textContent = textToDisplay.countdownText[countdownCallTracker];
       break;
     case 3:
-      htmlHeader.textContent = textToDisplay.countdownText[countdownCallTracker];
+      htmlGameHeader.textContent = textToDisplay.countdownText[countdownCallTracker];
       break;
     default:
-      htmlHeader.textContent = '';
+      htmlGameHeader.textContent = '';
       sun.reset();
       clearInterval(countdownIntervalCycle);
       animateSun();
@@ -315,16 +334,16 @@ function determineSpecies() {
 function speciesStory() {
   switch (selectedSpecies) {
     case 0:
-      htmlParagraph.textContent = textToDisplay.paragraphText[1];
+      speciesParagraph.textContent = textToDisplay.speciesText[selectedSpecies];
       break;
     case 1:
-      htmlParagraph.textContent = textToDisplay.paragraphText[2];
+      speciesParagraph.textContent = textToDisplay.speciesText[selectedSpecies];
       break;
     case 2:
-      htmlParagraph.textContent = textToDisplay.paragraphText[3];
+      speciesParagraph.textContent = textToDisplay.speciesText[selectedSpecies];
       break;
     default:
-      htmlParagraph.textContent = "Something's wrong. It says you're a pikachu?";
+      speciesParagraph.textContent = "Something's wrong. It says you're a pikachu?";
   }
 }
 //end function to display story of selected species
@@ -335,56 +354,55 @@ app.js contains JavaScript modified or written by Matt Batman.
 app.js contains pageAdvancement(), which is meant to be "the driver program" of the game
 
 */
-
-//function pageAdvancement()
-function pageAdvancement() {
-
-  if (confirmButtonClickCounter === 0) {
-    cssCircle.style.visibility = 'hidden'; //hide the moon circle
-    moon.animationRunning = false;
-    htmlHeader.textContent = textToDisplay.headerText[1];//advance header text displayed on screen
-    htmlParagraph.innerHTML = radioFormMarkup; //display the radio form to choose a species
-    htmlButton.textContent = textToDisplay.confirmButtonText[1];//advance header text displayed on screen
-    confirmButtonClickCounter++; //increment click counter
-  } else if (confirmButtonClickCounter === 1) {
-    //keep the moon circle hidden
-    cssCircle.style.visibility = 'hidden';
-  //switch cssCircle class from moon to sun
-  cssCircle.removeAttribute('class');
-  cssCircle.setAttribute('class', 'sun');
-  //check which radio button was selected
-  determineSpecies();
-
-  if (selectedSpecies < 3) {
-  //advance header text displayed on screen
-  htmlHeader.textContent = textToDisplay.headerText[2];
-
-  //display story in paragraph div based on selectedSpecies
-  speciesStory();
-
-  //advance button text displayed on screen
-  htmlButton.textContent = textToDisplay.confirmButtonText[2];
-
-  //increment click counter
-  confirmButtonClickCounter++;
-}//end selected species if validation
-} else if (confirmButtonClickCounter === 2) {
-  //keep the moon circle hidden
-
-  cssCircle.style.visibility = 'hidden';
-
-  startCountdown();
-  confirmButtonClickCounter++;
-} else if (confirmButtonClickCounter >= 3) {
-  //do nothing
+//function pageAdvancementOne
+function pageAdvancementOne() {
+  cssCircle.style.visibility = 'hidden'; //hide the moon circle
+  moon.animationRunning = false;
+  landingPage.style.display = 'none';
+  secondPage.style.display = 'block';
 }
-}//end pageAdvancement()
+//end function pageAdvancementOne
+
+//function pageAdvancementTwo
+function pageAdvancementTwo() {
+  cssCircle.style.visibility = 'hidden'; //hide the moon circle
+  cssCircle.removeAttribute('class'); //switch cssCircle class from moon to sun
+  cssCircle.setAttribute('class', 'sun'); //switch cssCircle class from moon to sun
+  determineSpecies(); //check which radio button was selected
+  if (selectedSpecies < 3) {
+  speciesStory(); //display story in paragraph div based on selectedSpecies
+  secondPage.style.display = 'none';
+  thirdPage.style.display = 'block';
+  }
+}
+//end function pageAdvancementTwo
+
+//function pageAdvancementThree
+function pageAdvancementThree() {
+  cssCircle.style.visibility = 'hidden';//start with the moon circle hidden
+  startCountdown();
+}
+//end function pageAdvancementThree
+
+//function to reset game
+function resetGame() {
+  sun.hardReset();
+  cssCircle.removeEventListener('click', sunCircleClicked, false); //end initial page advancment via confirmation button
+  lostPage.style.display = 'none';
+  landingPage.style.display = 'block';
+  htmlBody.setAttribute('class', 'night-body-settings');
+  htmlEarth.style.display = 'none';
+  cssCircle.removeAttribute('class'); //switch cssCircle class from moon to sun
+  cssCircle.setAttribute('class', 'moon'); //switch cssCircle class from moon to sun
+  cssCircle.style.visibility = 'initial'; //hide the moon circle
+  moon.resetMoon();
+  animateMoon();
+}
+//end function to reset game
 
 
 
-// EVENT HANDLERS
-
-
+// EVENT HANDLERS FOR PAGE FLOW
 
 //animate moon when page loads
 document.addEventListener('DOMContentLoaded',
@@ -397,25 +415,14 @@ function() {
   })();
 },
 false);
-/*
-window.addEventListener('load',
-function() {
-  (function moonAnimation(){
-    moon.renderAnimationCircular();
-    if (moon.animationRunning) {
-      requestAnimationFrame(moonAnimation, cssCircle);
-    }
-  })();
-},
-false);
-*/
-//advance page when user confirmation button is clicked
-htmlButton.addEventListener('click', pageAdvancement, false);
 
-//watch for resize of browser and change center of cirle's PATH
+//advance page when user confirmation button is clicked
+htmlButtonOne.addEventListener('click', pageAdvancementOne, false);
+htmlButtonTwo.addEventListener('click', pageAdvancementTwo, false);
+htmlButtonThree.addEventListener('click', pageAdvancementThree, false);
+htmlButtonWin.addEventListener('click', startCountdown, false);
+htmlButtonLost.addEventListener('click', resetGame, false);
+//watch for resize of browser and change center of cirle's path
 window.onresize = adjustCenterOfPath;
 
-
-
-
-// END EVENT HANDLERS
+// END EVENT HANDLERS FOR PAGE FLOW

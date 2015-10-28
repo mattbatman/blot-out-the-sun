@@ -33,26 +33,91 @@
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
-    <div class="row" id="main-game-box">
-      <div class="twelve column">
-        <h1 id="main-header-text">Blot Out the Sun</h1>
-        <p id="main-paragraph-text">Prepare for the sun to rise!</p>
-        <p class="button" href="#" id="user-confirm-button">Enter</p>
-
+    <!-- LANDING PAGE -->
+    <div id="landing-page-screen">
+      <div class="row" id="intro-moon-box">
+        <div class="twelve column">
+          <h1 class="main-header-text">Blot Out the Sun</h1>
+          <p>Prepare for the sun to rise!</p>
+          <p class="button" href="#" id="user-confirm-button-one">Enter</p>
+        </div>
       </div>
     </div>
-  </div>
+    <!-- LANDING PAGE -->
+
+    <!-- SECOND PAGE -->
+    <div id="second-title-screen">
+      <div class="row">
+        <div class="twelve column">
+          <h1 class="main-header-text">You Are A...</h1>
+          <fieldset id="radioRaceSelection">
+            <input type="radio" name="radio-choice" id="radio-choice-1" tabindex="1" value="Vampire"><label for="radio-choice-1">Vampire</label>
+            <br>
+            <input type="radio" name="radio-choice" id="radio-choice-2" tabindex="2" value="Werewolf"><label for="radio-choice-2">Werewolf</label>
+            <br>
+            <input type="radio" name="radio-choice" id="radio-choice-3" tabindex="3" value="Persian Archer"><label for="radio-choice-3">Persian Archer</label>
+            </fieldset>
+          <p class="button" href="#" id="user-confirm-button-two">APPLY SUNCREEN</p>
+        </div>
+      </div>
+    </div>
+    <!-- END SECOND PAGE -->
+    <!-- THIRD PAGE -->
+    <div id="third-title-screen">
+      <div class="row">
+        <div class="twelve column">
+          <h1 class="main-header-text">Behold!</h1>
+          <p id="species-story-text"></p>
+          <p class="button" href="#" id="user-confirm-button-three">START</p>
+        </div>
+      </div>
+    </div>
+    <!-- END THIRD PAGE -->
+
+
+
+  <!-- GAME PAGE OR FOURTH PAGE -->
+  <div id="game-screen">
+    <div class="row" id="main-game-box">
+      <div class="twelve column">
+        <h1 class="main-header-text" id="game-header-text"></h1>
+      </div>
+    </div>
+  </div><!-- END GAME PAGE -->
+
+
+  <!-- LOST PAGE OR FIFTH PAGE -->
+  <div id="lost-screen">
+    <div class="row">
+      <div class="twelve column">
+        <h1 class="main-header-text">Game Over</h1>
+        <p id="paragraph-lost-text">You failed your fellow creatures of the dark.</p>
+        <p class="day-button" href="#" id="user-confirm-button-reset">REINCARNATE</p>
+      </div>
+    </div>
+  </div><!-- END LOST PAGE -->
+
+  <!-- LOST PAGE OR FIFTH PAGE -->
+  <div id="win-screen">
+    <div class="row">
+      <div class="twelve column">
+        <h1 class="main-header-text">Darkness Shall Reign</h1>
+        <p id="paragraph-win-text">Such skill! You've restored the night 777 times. But beware - the sun always rises. It's peaking now. It seems stronger somehow...</p>
+        <p class="button" href="#" id="user-confirm-button-win">CONTINUE</p>
+      </div>
+    </div>
+  </div><!-- END LOST PAGE -->
+
+  </div><!-- END CONTAINER -->
+
+  <div id="earth" class="ground"></div>
+  <!-- END GAME PAGE -->
 
   <div id="floating-circle-div" class="moon"></div>
 
-  <div class="row">
-    <div class="twelve column" id="earth">
-    </div>
-  </div>
-
   <!-- Load Javascript
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script src="js/production.js"></script>
+    <script src="js/production.min.js"></script>
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->

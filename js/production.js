@@ -420,7 +420,7 @@ function resetGame() {
 cssCircle.style.visibility = 'hidden';
 if (screenWidth > screenSizeBreak) {
   cssCircle.style.visibility = 'initial';
-window.addEventListener('load',
+window.addEventListener('pageshow',
 function() {
   (function moonAnimation(){
     moon.renderAnimationCircular();

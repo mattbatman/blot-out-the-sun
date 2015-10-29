@@ -124,6 +124,9 @@ var radiusY = window.innerHeight/2; //pixels
 //var stretchFactor = 1.1;
 var progress, x, y;
 
+var screenSizeBreak = 550;
+var screenWidth = window.innerWidth;
+
 function adjustCenterOfPath() {
   centerX = window.innerWidth/2;
   centerY = window.innerHeight * 0.25;
@@ -187,7 +190,7 @@ function Circle(distanceTraveled, startTime, endPosition, duration, animationRun
   this.lost = function() {
     gamePage.style.display = 'none';
     lostPage.style.display = 'block';
-    if (window.innerHeight < 550) {
+    if (screenWidth < screenSizeBreak) {
       htmlEarth.removeAttribute('class');
       htmlEarth.setAttribute('class', 'lower-ground');
     }
@@ -401,7 +404,7 @@ function resetGame() {
   cssCircle.removeAttribute('class'); //switch cssCircle class from moon to sun
   cssCircle.setAttribute('class', 'moon'); //switch cssCircle class from moon to sun
   cssCircle.style.visibility = 'hidden'; //hide the moon circle for phablet and smaller
-  if (window.innerWidth > 550) {
+  if (screenWidth > screenSizeBreak) {
 //  cssCircle.style.visibility = 'initial'; //hide the moon circle
   moon.resetMoon();
   animateMoon();
@@ -415,7 +418,7 @@ function resetGame() {
 
 //animate moon when page loads
 cssCircle.style.visibility = 'hidden';
-if (window.innerWidth > 550) {
+if (screenWidth > screenSizeBreak) {
   cssCircle.style.visibility = 'initial';
 window.addEventListener('load',
 function() {

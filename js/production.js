@@ -187,6 +187,10 @@ function Circle(distanceTraveled, startTime, endPosition, duration, animationRun
   this.lost = function() {
     gamePage.style.display = 'none';
     lostPage.style.display = 'block';
+    if (window.innerHeight < 550) {
+      htmlEarth.removeAttribute('class');
+      htmlEarth.setAttribute('class', 'lower-ground');
+    }
     htmlParagraphLost.textContent = "You blotted the sun " + this.score + " times before failing your fellow creatures of the dark. You meditate on their screams as you all slowly burn to death.";
   };
 
@@ -392,6 +396,8 @@ function resetGame() {
   landingPage.style.display = 'block';
   htmlBody.setAttribute('class', 'night-body-settings');
   htmlEarth.style.display = 'none';
+  htmlEarth.removeAttribute('class');
+  htmlEarth.setAttribute('class', 'high-ground');
   cssCircle.removeAttribute('class'); //switch cssCircle class from moon to sun
   cssCircle.setAttribute('class', 'moon'); //switch cssCircle class from moon to sun
   cssCircle.style.visibility = 'initial'; //hide the moon circle

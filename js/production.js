@@ -132,6 +132,7 @@ function adjustCenterOfPath() {
   centerY = window.innerHeight * 0.25;
   radiusX = window.innerWidth/3; // pixels
   radiusY = window.innerHeight/2; //pixels
+  screenWidth = window.innerWidth;
 }
 
 //use onresize browers support with window.innerHeight > window.innerWidth
@@ -418,10 +419,13 @@ function resetGame() {
 
 //animate moon when page loads
 cssCircle.style.visibility = 'hidden';
-if (screenWidth > screenSizeBreak) {
-  cssCircle.style.visibility = 'initial';
+
 window.addEventListener('pageshow',
 function() {
+  adjustCenterOfPath();
+  if (screenWidth > screenSizeBreak) {
+    cssCircle.style.visibility = 'initial';
+  }
   (function moonAnimation(){
     moon.renderAnimationCircular();
     if (moon.animationRunning) {
@@ -430,7 +434,7 @@ function() {
   })();
 },
 false);
-}
+
 
 //advance page when user confirmation button is clicked
 htmlButtonOne.addEventListener('click', pageAdvancementOne, false);

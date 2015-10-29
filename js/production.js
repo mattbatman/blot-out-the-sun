@@ -400,8 +400,9 @@ function resetGame() {
   htmlEarth.setAttribute('class', 'high-ground');
   cssCircle.removeAttribute('class'); //switch cssCircle class from moon to sun
   cssCircle.setAttribute('class', 'moon'); //switch cssCircle class from moon to sun
+  cssCircle.style.visibility = 'hidden'; //hide the moon circle for phablet and smaller
   if (window.innerWidth > 550) {
-  cssCircle.style.visibility = 'initial'; //hide the moon circle
+//  cssCircle.style.visibility = 'initial'; //hide the moon circle
   moon.resetMoon();
   animateMoon();
   }

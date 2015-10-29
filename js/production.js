@@ -411,6 +411,9 @@ function resetGame() {
 // EVENT HANDLERS FOR PAGE FLOW
 
 //animate moon when page loads
+cssCircle.style.visibility = 'hidden';
+if (window.innerWidth > 550) {
+  cssCircle.style.visibility = 'initial';
 document.addEventListener('DOMContentLoaded',
 function() {
   (function moonAnimation(){
@@ -421,6 +424,7 @@ function() {
   })();
 },
 false);
+}
 
 //advance page when user confirmation button is clicked
 htmlButtonOne.addEventListener('click', pageAdvancementOne, false);

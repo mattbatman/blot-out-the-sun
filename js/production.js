@@ -417,7 +417,7 @@ function resetGame() {
 cssCircle.style.visibility = 'hidden';
 if (window.innerWidth > 550) {
   cssCircle.style.visibility = 'initial';
-document.addEventListener('DOMContentLoaded',
+document.addEventListener('load',
 function() {
   (function moonAnimation(){
     moon.renderAnimationCircular();

@@ -430,5 +430,6 @@ htmlButtonWin.addEventListener('click', startCountdown, false);
 htmlButtonLost.addEventListener('click', resetGame, false);
 //watch for resize of browser and change center of cirle's path
 window.onresize = adjustCenterOfPath;
+window.unload = adjustCenterOfPath;
 
 // END EVENT HANDLERS FOR PAGE FLOW

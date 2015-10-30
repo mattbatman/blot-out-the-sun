@@ -420,8 +420,8 @@ function resetGame() {
 //animate moon when page loads
 cssCircle.style.visibility = 'hidden';
 
-window.addEventListener('pageshow',
-function() {
+
+(function() {
   adjustCenterOfPath();
   if (screenWidth > screenSizeBreak) {
     cssCircle.style.visibility = 'initial';
@@ -432,8 +432,7 @@ function() {
       requestAnimationFrame(moonAnimation, cssCircle);
     }
   })();
-},
-false);
+})();
 
 
 //advance page when user confirmation button is clicked

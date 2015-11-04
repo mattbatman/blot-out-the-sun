@@ -420,6 +420,16 @@ function resetGame() {
 //animate moon when page loads
 cssCircle.style.visibility = 'hidden';
 
+//advance page when user confirmation button is clicked
+htmlButtonOne.addEventListener('click', pageAdvancementOne, false);
+htmlButtonTwo.addEventListener('click', pageAdvancementTwo, false);
+htmlButtonThree.addEventListener('click', pageAdvancementThree, false);
+htmlButtonWin.addEventListener('click', startCountdown, false);
+htmlButtonLost.addEventListener('click', resetGame, false);
+//watch for resize of browser and change center of cirle's path
+window.onresize = adjustCenterOfPath;
+
+// END EVENT HANDLERS FOR PAGE FLOW
 
 (function() {
   adjustCenterOfPath();
@@ -433,15 +443,3 @@ cssCircle.style.visibility = 'hidden';
     }
   })();
 })();
-
-
-//advance page when user confirmation button is clicked
-htmlButtonOne.addEventListener('click', pageAdvancementOne, false);
-htmlButtonTwo.addEventListener('click', pageAdvancementTwo, false);
-htmlButtonThree.addEventListener('click', pageAdvancementThree, false);
-htmlButtonWin.addEventListener('click', startCountdown, false);
-htmlButtonLost.addEventListener('click', resetGame, false);
-//watch for resize of browser and change center of cirle's path
-window.onresize = adjustCenterOfPath;
-
-// END EVENT HANDLERS FOR PAGE FLOW

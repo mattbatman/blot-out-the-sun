@@ -437,7 +437,7 @@ window.onresize = adjustCenterOfPath;
     cssCircle.style.visibility = 'initial';
   } else {
     cssCircle.style.visibility = 'initial';
-    cssCircle.offsetHeight;
+    htmlBody.offsetHeight;
     cssCircle.style.visibility = 'hidden';
   }
   (function moonAnimation(){

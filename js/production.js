@@ -435,6 +435,9 @@ window.onresize = adjustCenterOfPath;
   adjustCenterOfPath();
   if (screenWidth > screenSizeBreak) {
     cssCircle.style.visibility = 'initial';
+  } else {
+    cssCircle.style.visibility = 'initial';
+    cssCircle.style.visibility = 'hidden';
   }
   (function moonAnimation(){
     moon.renderAnimationCircular();

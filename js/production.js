@@ -430,16 +430,11 @@ htmlButtonLost.addEventListener('click', resetGame, false);
 window.onresize = adjustCenterOfPath;
 
 // END EVENT HANDLERS FOR PAGE FLOW
+if (screenWidth > screenSizeBreak) {
+  cssCircle.style.visibility = 'initial';
 
 (function() {
   adjustCenterOfPath();
-  if (screenWidth > screenSizeBreak) {
-    cssCircle.style.visibility = 'initial';
-  } else {
-    cssCircle.style.visibility = 'initial';
-    htmlBody.offsetHeight;
-    cssCircle.style.visibility = 'hidden';
-  }
   (function moonAnimation(){
     moon.renderAnimationCircular();
     if (moon.animationRunning) {
@@ -447,3 +442,5 @@ window.onresize = adjustCenterOfPath;
     }
   })();
 })();
+
+} 

@@ -126,6 +126,8 @@ var progress, x, y;
 
 var screenSizeBreak = 550;
 var screenWidth = window.innerWidth;
+console.log("window.innerWidth" + window.innerWidth);
+console.log("window.innerHeight" + window.innerHeight);
 
 function adjustCenterOfPath() {
   centerX = window.innerWidth/2;
